@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦄 2 Anos da Ayla</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦄</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Corações flutuantes -->
+  <div id="hearts-container" aria-hidden="true"></div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="rainbow" aria-hidden="true"></div>
+    <div class="cloud cloud-tl" aria-hidden="true"></div>
+    <div class="cloud cloud-tr" aria-hidden="true"></div>
+    <div class="cloud cloud-bl" aria-hidden="true"></div>
+
+    <div class="balloon-scene" id="tap-target">
+      <div class="balloon-flowers" aria-hidden="true">🌸 💜 🌷</div>
+      <div class="balloon-body">
+        <div class="balloon-shine"></div>
+      </div>
+      <div class="balloon-ropes" aria-hidden="true">
+        <span class="rope rope-l"></span>
+        <span class="rope rope-ml"></span>
+        <span class="rope rope-mr"></span>
+        <span class="rope rope-r"></span>
+      </div>
+      <div class="basket">
+        <span class="basket-unicorn">🦄</span>
+        <span class="basket-flower">🌸</span>
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <p class="hero-label">você está convidada para os</p>
+      <h1 class="hero-anos">2 ANOS</h1>
+      <p class="hero-da">da</p>
+      <h1 class="hero-nome">Ayla</h1>
+    </div>
+  </section>
+
+  <!-- ===== DETALHES ===== -->
+  <section class="details">
+    <h2 class="section-title reveal">🎀 detalhes da festa 🎀</h2>
+    <div class="detail-cards">
+      <div class="dcard reveal">
+        <span class="dcard-icon">🗓️</span>
+        <span class="dcard-label">Data</span>
+        <span class="dcard-val">12 de Julho</span>
+      </div>
+      <div class="dcard reveal">
+        <span class="dcard-icon">⏰</span>
+        <span class="dcard-label">Horário</span>
+        <span class="dcard-val">às 16h</span>
+      </div>
+      <div class="dcard dcard-wide reveal">
+        <span class="dcard-icon">📍</span>
+        <div>
+          <span class="dcard-label">Local</span>
+          <span class="dcard-val">Acasa Recepções<br>Taperoá – PB</span>
+        </div>
+      </div>
+    </div>
+    <p class="details-tagline reveal">contamos com sua presença! 💜</p>
+  </section>
+
+  <!-- ===== CONFIRMAÇÃO ===== -->
+  <section class="rsvp">
+    <p class="rsvp-deco reveal" aria-hidden="true">✨ 🦄 ✨</p>
+    <h2 class="section-title reveal">confirme sua presença</h2>
+    <p class="rsvp-sub reveal">conta pra gente se você vem! 🎉</p>
+
+    <!-- ⚠️  Substitua SEU_ID_AQUI pelo ID do seu formulário no Formspree -->
+    <form id="rsvp-form" class="rsvp-form reveal"
+          action="https://formspree.io/f/xwvzwlgg"
+          method="POST">
+      <input type="hidden" name="_subject" value="💜 Nova confirmação - Festa da Ayla 🦄">
+
+      <div class="fgroup">
+        <label class="flabel" for="nome">Seu nome completo</label>
+        <input class="finput" type="text" id="nome" name="nome"
+               placeholder="Digite seu nome..." autocomplete="name" required>
+      </div>
+
+      <div class="fgroup">
+        <label class="flabel">Vai comparecer?</label>
+        <div class="fchoices">
+          <label class="fchoice">
+            <input type="radio" name="presenca" value="Sim, vou estar lá! 🎉" required>
+            <div class="fchoice-box fchoice-yes">
+              <span class="fchoice-emoji">🎉</span>
+              <span class="fchoice-text">Sim, vou lá!</span>
+            </div>
+          </label>
+          <label class="fchoice">
+            <input type="radio" name="presenca" value="Não poderei ir 😢">
+            <div class="fchoice-box fchoice-no">
+              <span class="fchoice-emoji">😢</span>
+              <span class="fchoice-text">Não poderei ir</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="fsubmit">
+        <span class="fsubmit-text">Confirmar Presença ✨</span>
+      </button>
+    </form>
+
+    <div id="form-success" class="form-success hidden">
+      <div class="fs-anim">🦄✨🎉</div>
+      <h3>Recebido! Obrigada!</h3>
+      <p>Mal podemos esperar para celebrar com você! 💜</p>
+    </div>
+  </section>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="footer">
+    <p>feito com 💜 para a <strong>Ayla</strong></p>
+    <!-- Segredo: toque 5x neste botão invisível para ver as confirmações -->
+    <button id="secret-btn" aria-label=" " tabindex="-1" aria-hidden="true"></button>
+  </footer>
+
+  <!-- ===== MODAL ADMIN (oculto) ===== -->
+  <div id="admin-modal" class="amodal hidden" role="dialog" aria-modal="true" aria-labelledby="amodal-title">
+    <div class="amodal-box">
+      <button class="amodal-close" id="amodal-close" aria-label="Fechar">✕</button>
+      <div class="amodal-icon">🔐</div>
+      <h3 id="amodal-title">Confirmações de Presença</h3>
+      <p>Acesse o painel do Formspree para ver todas as respostas:</p>
+      <a href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer" class="amodal-link">
+        Ver confirmações →
+      </a>
+      <p class="amodal-hint">Faça login com o email cadastrado no Formspree.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
