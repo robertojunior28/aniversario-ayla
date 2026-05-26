@@ -1,4 +1,16 @@
 /* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+const loader = document.getElementById('loader');
+
+window.addEventListener('load', () => {
+  loader.classList.add('hidden');
+});
+
+// Fallback: garante que o loader some mesmo se alguma imagem falhar
+setTimeout(() => loader.classList.add('hidden'), 8000);
+
+/* ============================================================
    CORAÇÕES FLUTUANTES
    ============================================================ */
 const heartsContainer = document.getElementById('hearts-container');
