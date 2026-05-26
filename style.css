@@ -93,26 +93,28 @@ body {
   overflow: hidden;
 }
 
-/* --- Arco-íris --- */
-.rainbow {
+/* --- Arco-íris (imagem) --- */
+.rainbow-img {
   position: absolute;
-  top: 20px;
-  right: -50px;
-  width: 220px;
-  height: 110px;
-  border-radius: 220px 220px 0 0;
-  background: radial-gradient(
-    circle at 50% 110%,
-    transparent         52%,
-    #E879F9  52%, #E879F9  59%,
-    #818CF8  59%, #818CF8  66%,
-    #67E8F9  66%, #67E8F9  73%,
-    #86EFAC  73%, #86EFAC  80%,
-    #FDE047  80%, #FDE047  87%,
-    #FB923C  87%, #FB923C  94%,
-    transparent         94%
-  );
-  opacity: 0.82;
+  top: 10px;
+  right: -10px;
+  width: 200px;
+  max-width: 50vw;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* --- Nuvem kawaii topo-esquerdo (imagem) --- */
+.nuvem-img {
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  width: 130px;
+  max-width: 34vw;
+  height: auto;
+  pointer-events: none;
+  animation: cloudDrift 7s ease-in-out infinite;
 }
 
 /* --- Nuvens CSS --- */
@@ -130,21 +132,26 @@ body {
   border-radius: 50%;
 }
 
-.cloud-tl {
-  width: 110px; height: 42px;
-  top: 72px; left: -15px;
-  animation: cloudDrift 7s ease-in-out infinite;
+/* Nuvem meio-esquerda (abaixo do balão, sem sobrepor) */
+.cloud-mid-left {
+  width: 140px; height: 52px;
+  top: 56%; left: -20px;
+  animation: cloudDrift 8s ease-in-out infinite;
 }
-.cloud-tl::before { width: 54px; height: 54px; top: -26px; left: 12px; }
-.cloud-tl::after  { width: 38px; height: 38px; top: -16px; left: 50px; }
+.cloud-mid-left::before { width: 68px; height: 68px; top: -34px; left: 14px; }
+.cloud-mid-left::after  { width: 48px; height: 48px; top: -22px; left: 62px; }
 
-.cloud-tr {
-  width: 80px; height: 32px;
-  top: 36px; right: 8px;
-  animation: cloudDrift 9s ease-in-out infinite reverse;
+/* Nuvem meio-direita (ao lado do balão, sem sobrepor) */
+.cloud-mid-right {
+  width: 110px; height: 42px;
+  top: 42%; right: -18px;
+  background: white;
+  opacity: 0.95;
+  animation: cloudDrift 10s ease-in-out infinite reverse;
 }
-.cloud-tr::before { width: 40px; height: 40px; top: -20px; left: 8px; }
-.cloud-tr::after  { width: 28px; height: 28px; top: -12px; left: 36px; }
+.cloud-mid-right::before { width: 54px; height: 54px; top: -26px; left: 12px; }
+.cloud-mid-right::after  { width: 38px; height: 38px; top: -16px; left: 48px; }
+
 
 .cloud-bl {
   width: 130px; height: 52px;
@@ -159,7 +166,18 @@ body {
   50%       { transform: translateX(14px);  }
 }
 
-/* --- Balão --- */
+/* --- Imagem do balão/unicórnio --- */
+.unicorn-img {
+  width: 300px;
+  max-width: 78vw;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 24px rgba(168, 85, 247, 0.30));
+}
+
+/* ---- elementos CSS do balão removidos, substituídos pela imagem ---- */
+
+/* --- Cena do balão (animação flutuante mantida) --- */
 .balloon-scene {
   display: flex;
   flex-direction: column;
@@ -171,101 +189,9 @@ body {
 }
 
 @keyframes balloonFloat {
-  0%, 100% { transform: translateY(0)    rotate(-1.5deg); }
-  50%       { transform: translateY(-18px) rotate(1.5deg); }
+  0%, 100% { transform: translateY(0)     rotate(-1.5deg); }
+  50%       { transform: translateY(-18px) rotate(1.5deg);  }
 }
-
-.balloon-flowers {
-  font-size: 22px;
-  margin-bottom: -6px;
-  z-index: 2;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
-}
-
-.balloon-body {
-  width: 148px;
-  height: 178px;
-  background: linear-gradient(135deg,
-    #DDD6FE 0%,
-    #C084FC 30%,
-    #A855F7 65%,
-    #7C3AED 100%);
-  border-radius: 50% 50% 48% 48% / 58% 58% 42% 42%;
-  position: relative;
-  box-shadow:
-    inset -18px -22px 38px rgba(0,0,0,0.18),
-    inset  12px  12px 28px rgba(255,255,255,0.28),
-    0 14px 44px rgba(124, 58, 237, 0.38);
-}
-
-.balloon-shine {
-  position: absolute;
-  top: 14px;
-  left: 18px;
-  width: 44px;
-  height: 68px;
-  background: rgba(255, 255, 255, 0.32);
-  border-radius: 50%;
-  transform: rotate(-30deg);
-  filter: blur(5px);
-}
-
-/* Cordas do balão */
-.balloon-ropes {
-  position: relative;
-  width: 110px;
-  height: 48px;
-  margin: 0 auto;
-}
-
-.rope {
-  position: absolute;
-  width: 2px;
-  height: 52px;
-  background: linear-gradient(to bottom, #7C3AED, rgba(196,130,252,0.4));
-  border-radius: 1px;
-  top: 0;
-  transform-origin: top center;
-}
-
-.rope-l  { left:  16px; transform: rotate(18deg);  }
-.rope-ml { left:  38px; transform: rotate(7deg);   }
-.rope-mr { right: 38px; transform: rotate(-7deg);  }
-.rope-r  { right: 16px; transform: rotate(-18deg); }
-
-/* Cesta */
-.basket {
-  width: 96px;
-  height: 62px;
-  background: linear-gradient(135deg, #78350F, #92400E, #B45309);
-  border-radius: 6px 6px 14px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: -4px;
-  box-shadow:
-    inset 0 -4px 10px rgba(0,0,0,0.22),
-    0 6px 14px rgba(0,0,0,0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.basket::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 10px,
-    rgba(0,0,0,0.07) 10px,
-    rgba(0,0,0,0.07) 12px
-  );
-}
-
-.basket-unicorn { font-size: 30px; position: relative; z-index: 1; }
-.basket-flower  { font-size: 16px; position: relative; z-index: 1; }
 
 /* --- Texto do Hero --- */
 .hero-text {
