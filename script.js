@@ -66,27 +66,19 @@ const form        = document.getElementById('rsvp-form');
 const successMsg  = document.getElementById('form-success');
 
 if (form) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  const nomeInput = document.getElementById('nome');
 
-    // Validação simples: ao menos uma opção de presença selecionada
-    const presenca = form.querySelector('input[name="presenca"]:checked');
-    if (!presenca) {
-      // Feedback visual nas opções
-      form.querySelectorAll('.fchoice-box').forEach(b => {
-        b.style.animation = 'none';
-        b.style.border = '2px solid #F472B6';
-        setTimeout(() => b.style.border = '', 1200);
-      });
-      return;
-    }
+  async function enviarFormulario(radio) {
+    const box          = radio.closest('.fchoice').querySelector('.fchoice-box');
+    const emojiEl      = box.querySelector('.fchoice-emoji');
+    const textoEl      = box.querySelector('.fchoice-text');
+    const origEmoji    = emojiEl.textContent;
+    const origTexto    = textoEl.textContent;
 
-    const btn         = form.querySelector('.fsubmit');
-    const btnText     = btn.querySelector('.fsubmit-text');
-    const originalTxt = btnText.textContent;
-
-    btn.disabled   = true;
-    btnText.textContent = 'Enviando... ✨';
+    // Desabilita todas as opções durante envio
+    form.querySelectorAll('input[name="presenca"]').forEach(r => r.disabled = true);
+    emojiEl.textContent = '⏳';
+    textoEl.textContent = 'Enviando...';
 
     try {
       const res = await fetch(form.action, {
@@ -96,8 +88,7 @@ if (form) {
       });
 
       if (res.ok) {
-        // Sucesso
-        const vai = presenca.value.startsWith('Sim');
+        const vai = radio.value.startsWith('Sim');
         document.getElementById('fs-anim').textContent  = vai ? '🦄✨🎉' : '💜🥺💜';
         document.getElementById('fs-title').textContent = vai ? 'Recebido! Obrigada!' : 'Recebido! Que pena...';
         document.getElementById('fs-msg').textContent   = vai
@@ -105,22 +96,34 @@ if (form) {
           : 'Sentiremos sua falta! Mandamos um beijo especial. 💜';
         form.classList.add('hidden');
         successMsg.classList.remove('hidden');
-        // Chuva de corações comemorativa
-        for (let i = 0; i < 14; i++) {
-          setTimeout(createHeart, i * 120);
-        }
+        for (let i = 0; i < 14; i++) setTimeout(createHeart, i * 120);
       } else {
-        const data = await res.json().catch(() => ({}));
-        const msg  = (data.errors || []).map(e => e.message).join(', ') || 'Tente novamente.';
-        btnText.textContent = '⚠️ ' + msg;
-        btn.disabled = false;
-        setTimeout(() => { btnText.textContent = originalTxt; }, 3500);
+        emojiEl.textContent = '⚠️';
+        textoEl.textContent = 'Tente novamente';
+        form.querySelectorAll('input[name="presenca"]').forEach(r => r.disabled = false);
+        radio.checked = false;
+        setTimeout(() => { emojiEl.textContent = origEmoji; textoEl.textContent = origTexto; }, 3500);
       }
     } catch (_) {
-      btnText.textContent = '⚠️ Erro de conexão. Tente novamente.';
-      btn.disabled = false;
-      setTimeout(() => { btnText.textContent = originalTxt; }, 3500);
+      emojiEl.textContent = '⚠️';
+      textoEl.textContent = 'Sem conexão';
+      form.querySelectorAll('input[name="presenca"]').forEach(r => r.disabled = false);
+      radio.checked = false;
+      setTimeout(() => { emojiEl.textContent = origEmoji; textoEl.textContent = origTexto; }, 3500);
     }
+  }
+
+  form.querySelectorAll('input[name="presenca"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (!nomeInput.value.trim()) {
+        // Nome vazio — sacudir o input e desmarcar
+        nomeInput.classList.add('shake');
+        setTimeout(() => nomeInput.classList.remove('shake'), 600);
+        radio.checked = false;
+        return;
+      }
+      enviarFormulario(radio);
+    });
   });
 }
 
