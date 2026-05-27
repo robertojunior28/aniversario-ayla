@@ -300,17 +300,16 @@ body {
   font-family: var(--font-script);
   font-size: 30px;
   color: var(--purple-mid);
-  margin: -2px 0 0 0;
+  margin: -2px 0 -50px 0;
 }
 
 .hero-nome {
   font-family: var(--font-brittany);
-  font-size: 300px;
+  font-size: clamp(100px, 52vw, 220px);
   font-weight: normal;
   color: var(--purple-mid);
-  line-height: 0.20;
-  margin-top: -20px;
-  padding-top: 0px;
+  line-height: 0.7;
+  margin-top: 0;
   text-shadow: 2px 4px 16px rgba(168, 85, 247, 0.28);
 }
 
