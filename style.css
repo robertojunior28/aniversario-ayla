@@ -169,7 +169,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: -20px 20px 50px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 /* --- Arco-íris (imagem) --- */
@@ -311,6 +312,7 @@ body {
   color: var(--purple-mid);
   line-height: 0.7;
   margin-top: 0;
+  padding-bottom: 40px;
   text-shadow: 2px 4px 16px rgba(168, 85, 247, 0.28);
 }
 
