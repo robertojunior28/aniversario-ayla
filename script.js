@@ -75,6 +75,9 @@ if (form) {
     const origEmoji    = emojiEl.textContent;
     const origTexto    = textoEl.textContent;
 
+    // Captura o FormData ANTES de desabilitar os campos
+    const formData = new FormData(form);
+
     // Desabilita todas as opções durante envio
     form.querySelectorAll('input[name="presenca"]').forEach(r => r.disabled = true);
     emojiEl.textContent = '⏳';
@@ -83,7 +86,7 @@ if (form) {
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         headers: { 'Accept': 'application/json' }
       });
 
