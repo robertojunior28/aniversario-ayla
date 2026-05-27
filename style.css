@@ -17,7 +17,16 @@
   --shadow:      0 8px 32px rgba(168, 85, 247, 0.15);
   --font-script: 'Dancing Script', cursive;
   --font-body:   'Nunito', sans-serif;
+  --font-brittany: 'Peace Marker', 'Dancing Script', cursive;
   --radius:      20px;
+}
+
+@font-face {
+  font-family: 'Peace Marker';
+  src: url('fonts/Amsterdam.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 *, *::before, *::after {
@@ -159,7 +168,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px 50px;
+  padding: -20px 20px 50px;
   overflow: hidden;
 }
 
@@ -270,7 +279,7 @@ body {
 }
 
 .hero-label {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--brown-lt);
   font-weight: 700;
   letter-spacing: 0.4px;
@@ -279,10 +288,11 @@ body {
 }
 
 .hero-anos {
+  font-family: serif;
   font-size: 58px;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--brown);
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   line-height: 1;
 }
 
@@ -290,15 +300,17 @@ body {
   font-family: var(--font-script);
   font-size: 30px;
   color: var(--purple-mid);
-  margin: -2px 0;
+  margin: -2px 0 0 0;
 }
 
 .hero-nome {
-  font-family: var(--font-script);
-  font-size: 78px;
-  font-weight: 700;
+  font-family: var(--font-brittany);
+  font-size: 300px;
+  font-weight: normal;
   color: var(--purple-mid);
-  line-height: 1;
+  line-height: 0.20;
+  margin-top: -20px;
+  padding-top: 0px;
   text-shadow: 2px 4px 16px rgba(168, 85, 247, 0.28);
 }
 
@@ -313,7 +325,7 @@ body {
 
 .section-title {
   font-family: var(--font-script);
-  font-size: 32px;
+  font-size: 30px;
   color: var(--purple-dk);
   font-weight: 700;
   margin-bottom: 30px;
@@ -350,7 +362,7 @@ body {
 }
 
 .dcard-icon   { font-size: 30px; }
-.dcard-label  { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); }
+.dcard-label  { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); }
 .dcard-val    { font-size: 15px; font-weight: 700; color: var(--brown); line-height: 1.5; text-align: center; }
 
 .details-tagline {
@@ -380,7 +392,7 @@ body {
 }
 
 .rsvp-sub {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--purple-mid);
   font-weight: 700;
   margin-bottom: 28px;

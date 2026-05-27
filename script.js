@@ -97,6 +97,12 @@ if (form) {
 
       if (res.ok) {
         // Sucesso
+        const vai = presenca.value.startsWith('Sim');
+        document.getElementById('fs-anim').textContent  = vai ? '🦄✨🎉' : '💜🥺💜';
+        document.getElementById('fs-title').textContent = vai ? 'Recebido! Obrigada!' : 'Recebido! Que pena...';
+        document.getElementById('fs-msg').textContent   = vai
+          ? 'Mal podemos esperar para celebrar com você! 💜'
+          : 'Sentiremos sua falta! Mandamos um beijo especial. 💜';
         form.classList.add('hidden');
         successMsg.classList.remove('hidden');
         // Chuva de corações comemorativa
