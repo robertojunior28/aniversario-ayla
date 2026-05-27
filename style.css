@@ -263,7 +263,7 @@ body {
   align-items: center;
   animation: balloonFloat 4.5s ease-in-out infinite;
   cursor: pointer;
-  margin-bottom: 28px;
+  margin-bottom: 60px;
   user-select: none;
 }
 
@@ -276,6 +276,7 @@ body {
 .hero-text {
   text-align: center;
   z-index: 2;
+  margin-top: -60px;
 }
 
 .hero-label {
