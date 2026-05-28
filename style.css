@@ -124,6 +124,36 @@ body {
 }
 
 /* ============================================================
+   ESTRELAS DE FUNDO
+   ============================================================ */
+#stars-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  max-width: 430px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: twinkle var(--tdur, 3s) ease-in-out infinite;
+  animation-delay: var(--tdel, 0s);
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0;              transform: scale(0.5); }
+  50%  { opacity: var(--tmax, 0.9); transform: scale(1.2); }
+  100% { opacity: 0;              transform: scale(0.5); }
+}
+
+/* ============================================================
    CORAÇÕES FLUTUANTES
    ============================================================ */
 #hearts-container {

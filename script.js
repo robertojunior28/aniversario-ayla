@@ -2,13 +2,23 @@
    LOADING SCREEN
    ============================================================ */
 const loader = document.getElementById('loader');
+let heartsStarted = false;
 
-window.addEventListener('load', () => {
+function hideLoader() {
+  if (loader.classList.contains('hidden')) return;
   loader.classList.add('hidden');
-});
+  // Aguarda a transição de saída do loader (~400ms) antes de lançar o confete
+  setTimeout(() => {
+    launchConfetti();
+    // Inicia os corações após o confete (0 s)
+    setTimeout(startHearts, 0);
+  }, 400);
+}
+
+window.addEventListener('load', hideLoader);
 
 // Fallback: garante que o loader some mesmo se alguma imagem falhar
-setTimeout(() => loader.classList.add('hidden'), 8000);
+setTimeout(hideLoader, 8000);
 
 /* ============================================================
    CORAÇÕES FLUTUANTES
@@ -35,13 +45,73 @@ function createHeart() {
   setTimeout(() => heart.remove(), (dur + delay) * 1000 + 200);
 }
 
-// Cria corações periodicamente
-setInterval(createHeart, 900);
+/* ============================================================
+   CONFETE PÓS-LOADING
+   ============================================================ */
+function launchConfetti() {
+  if (typeof confetti === 'undefined') { startHearts(); return; }
 
-// Burst inicial ao carregar a página
-for (let i = 0; i < 6; i++) {
-  setTimeout(createHeart, i * 250);
+  const colors = ['#FFB6D9', '#C084FC', '#FDE047', '#F472B6', '#A855F7', '#ffffff'];
+
+  // Explosão central
+  confetti({ particleCount: 130, spread: 90, origin: { y: 0.55 }, colors, scalar: 1.2 });
+
+  // Canhões laterais (300 ms depois)
+  setTimeout(() => {
+    confetti({ particleCount: 70, angle: 60,  spread: 60, origin: { x: 0,   y: 0.65 }, colors });
+    confetti({ particleCount: 70, angle: 120, spread: 60, origin: { x: 1,   y: 0.65 }, colors });
+  }, 300);
+
+  // Segundo burst para mais impacto (700 ms depois)
+  setTimeout(() => {
+    confetti({ particleCount: 90, spread: 110, origin: { y: 0.45 }, colors, scalar: 0.9 });
+  }, 700);
 }
+
+// Inicia os corações (chamado após o confete)
+function startHearts() {
+  if (heartsStarted) return;
+  heartsStarted = true;
+  // Burst inicial
+  for (let i = 0; i < 8; i++) {
+    setTimeout(createHeart, i * 200);
+  }
+  // Fluxo contínuo
+  setInterval(createHeart, 900);
+}
+
+/* ============================================================
+   ESTRELAS DE FUNDO
+   ============================================================ */
+(function createStars() {
+  const container = document.getElementById('stars-container');
+  if (!container) return;
+
+  const COLORS = ['#ffffff', '#FFE8F5', '#F3E8FF', '#FFF8E0'];
+  const COUNT  = 60;
+
+  for (let i = 0; i < COUNT; i++) {
+    const star = document.createElement('span');
+    star.classList.add('star');
+
+    const size = 1.5 + Math.random() * 3;          // 1.5 – 4.5 px
+    const dur  = 2 + Math.random() * 5;            // 2 – 7 s
+    const del  = Math.random() * 9;                // 0 – 9 s delay
+    const max  = 0.7 + Math.random() * 0.3;        // 0.7 – 1.0 opacidade máx
+
+    star.style.left    = Math.random() * 96 + '%';
+    star.style.top     = Math.random() * 96 + '%';
+    star.style.width   = size + 'px';
+    star.style.height  = size + 'px';
+    star.style.boxShadow = `0 0 ${size * 3}px ${size * 1.5}px rgba(255,255,255,0.9)`;
+    star.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
+    star.style.setProperty('--tdur', dur + 's');
+    star.style.setProperty('--tdel', del + 's');
+    star.style.setProperty('--tmax', max);
+
+    container.appendChild(star);
+  }
+}());
 
 /* ============================================================
    SCROLL REVEAL (IntersectionObserver)
